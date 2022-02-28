@@ -47,7 +47,7 @@ export default {
         appendToast: append
       })
     },
-    saveProduct (product) {
+    async saveProduct (product) {
       console.log('Submit', product)
       if (product.id < 0) {
         axios.post('http://localhost:3000/products', product).then(res => {
