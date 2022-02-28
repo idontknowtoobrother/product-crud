@@ -39,15 +39,25 @@ export default {
     ProductForm
   },
   methods: {
+    makeToast (title, msg, append = false) {
+      this.toastCount++
+      this.$bvToast.toast(msg, {
+        title: title,
+        autoHideDelay: 3000,
+        appendToast: append
+      })
+    },
     saveProduct (product) {
       console.log('Submit', product)
       if (product.id < 0) {
         axios.post('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
+          this.makeToast('Successfully Add New Product', `สินค้า ${product.name} ถูกเพิ่มแล้ว / ไอดี ${res.data.id}`)
         })
       } else {
         axios.put('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
+          this.makeToast('Successfully Add New Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
         })
       }
     },
@@ -61,6 +71,7 @@ export default {
       if (confirm(`คุณต้องการจะลบสินค้า ${product.id} หรือไม่`)) {
         axios.delete(`http://localhost:3000/products/${product.id}`).then(res => {
           this.refreshProducts()
+          this.makeToast('Successfully Deleted Product', `สินค้าไอดี ${product.id} ถูกลบแล้ว (${product.name})`)
         })
       }
     },
