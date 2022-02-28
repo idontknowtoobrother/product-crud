@@ -57,7 +57,7 @@ export default {
       } else {
         axios.put('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
-          this.makeToast('Successfully Add New Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
+          this.makeToast('Successfully Edited Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
         })
       }
     },
