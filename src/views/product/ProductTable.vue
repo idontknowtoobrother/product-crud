@@ -53,11 +53,17 @@ export default {
         axios.post('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
           this.makeToast('Successfully Add New Product', `สินค้า ${product.name} ถูกเพิ่มแล้ว / ไอดี ${res.data.id}`)
+        }).catch(e => {
+          this.makeToast('Can\'t Add New Product', `ไม่สามารถเพิ่มสินค้า ${product.id}`)
+          this.refreshProducts()
         })
       } else {
         axios.put('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
           this.makeToast('Successfully Edited Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
+        }).catch(e => {
+          this.makeToast('Can\'t Edited Product', `ไม่สามารถปรับปรุงสินค้า ${product.id}`)
+          this.refreshProducts()
         })
       }
     },
@@ -72,6 +78,9 @@ export default {
         axios.delete(`http://localhost:3000/products/${product.id}`).then(res => {
           this.refreshProducts()
           this.makeToast('Successfully Deleted Product', `สินค้าไอดี ${product.id} ถูกลบแล้ว (${product.name})`)
+        }).catch(e => {
+          this.makeToast('Can\'t Delete Product', `ไม่สามารถลบสินค้า ${product.id}`)
+          this.refreshProducts()
         })
       }
     },
