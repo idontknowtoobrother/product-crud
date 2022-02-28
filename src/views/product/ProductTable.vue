@@ -42,15 +42,13 @@ export default {
     saveProduct (product) {
       console.log('Submit', product)
       if (product.id < 0) {
-        product.id = this.productId
-        this.productItems.push(product)
-        this.productId++
-      } else {
-        const index = this.productItems.findIndex((item) => {
-          return product.id === item.id
+        axios.post('http://localhost:3000/products', product).then(res => {
+          this.refreshProducts()
         })
-        // this.productItems[index] = product
-        this.productItems.splice(index, 1, product)
+      } else {
+        axios.put('http://localhost:3000/products', product).then(res => {
+          this.refreshProducts()
+        })
       }
     },
     editProduct (item) {
@@ -61,13 +59,12 @@ export default {
     },
     deleteProduct (product) {
       if (confirm(`คุณต้องการจะลบสินค้า ${product.id} หรือไม่`)) {
-        const index = this.productItems.findIndex((item) => {
-          return product.id === item.id
+        axios.delete(`http://localhost:3000/products/${product.id}`).then(res => {
+          this.refreshProducts()
         })
-        this.productItems.splice(index, 1)
       }
     },
-    getProducts () {
+    refreshProducts () {
       axios.get('http://localhost:3000/products').then(respone => {
         this.productItems = respone.data
       })
@@ -98,7 +95,7 @@ export default {
     }
   },
   mounted () {
-    this.getProducts()
+    this.refreshProducts()
   }
 }
 </script>
