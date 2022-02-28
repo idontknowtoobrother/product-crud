@@ -39,7 +39,7 @@ export default {
     ProductForm
   },
   methods: {
-    makeToast (title, msg, append = false) {
+    makeToast (title, msg, variant = 'sucess', append = false) {
       this.toastCount++
       this.$bvToast.toast(msg, {
         title: title,
@@ -54,7 +54,7 @@ export default {
           this.refreshProducts()
           this.makeToast('Successfully Add New Product', `สินค้า ${product.name} ถูกเพิ่มแล้ว / ไอดี ${res.data.id}`)
         }).catch(e => {
-          this.makeToast('Can\'t Add New Product', `ไม่สามารถเพิ่มสินค้า ${product.id}`)
+          this.makeToast('Can\'t Add New Product', `ไม่สามารถเพิ่มสินค้า ${product.id}`, 'danger')
           this.refreshProducts()
         })
       } else {
@@ -62,7 +62,7 @@ export default {
           this.refreshProducts()
           this.makeToast('Successfully Edited Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
         }).catch(e => {
-          this.makeToast('Can\'t Edited Product', `ไม่สามารถปรับปรุงสินค้า ${product.id}`)
+          this.makeToast('Can\'t Edited Product', `ไม่สามารถปรับปรุงสินค้า ${product.id}`, 'danger')
           this.refreshProducts()
         })
       }
@@ -79,7 +79,7 @@ export default {
           this.refreshProducts()
           this.makeToast('Successfully Deleted Product', `สินค้าไอดี ${product.id} ถูกลบแล้ว (${product.name})`)
         }).catch(e => {
-          this.makeToast('Can\'t Delete Product', `ไม่สามารถลบสินค้า ${product.id}`)
+          this.makeToast('Can\'t Delete Product', `ไม่สามารถลบสินค้า ${product.id}`, 'danger')
           this.refreshProducts()
         })
       }
