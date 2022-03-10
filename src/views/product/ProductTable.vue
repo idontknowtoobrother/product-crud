@@ -93,7 +93,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'id', label: 'ไอดี' },
+        { key: '_id', label: 'ไอดี' },
         { key: 'name', label: 'ชื่อสินค้า' },
         { key: 'price', label: 'ราคา' },
         { key: 'operators', label: 'กระบวนการ' }

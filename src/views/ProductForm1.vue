@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       form: {
-        id: -1,
+        _id: '',
         name: '',
         price: 0
       }
@@ -83,7 +83,7 @@ export default {
     },
     reset () {
       this.form = {
-        id: -1,
+        _id: '',
         name: '',
         price: 0
       }
