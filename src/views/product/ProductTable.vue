@@ -48,21 +48,20 @@ export default {
       })
     },
     async saveProduct (product) {
-      console.log('Submit', product)
-      if (product.id < 0) {
+      if (product._id === '') {
         axios.post('http://localhost:3000/products', product).then(res => {
           this.refreshProducts()
-          this.makeToast('Successfully Add New Product', `สินค้า ${product.name} ถูกเพิ่มแล้ว / ไอดี ${res.data.id}`)
+          this.makeToast('Successfully Add New Product', `สินค้า ${product.name} ถูกเพิ่มแล้ว / ไอดี ${res.data._id}`)
         }).catch(e => {
-          this.makeToast('Can\'t Add New Product', `ไม่สามารถเพิ่มสินค้า ${product.id}`, 'danger')
+          this.makeToast('Can\'t Add New Product', `ไม่สามารถเพิ่มสินค้า ${product._id}`, 'danger')
           this.refreshProducts()
         })
       } else {
-        axios.put('http://localhost:3000/products', product).then(res => {
+        axios.put(`http://localhost:3000/products/${product._id}`, product).then(res => {
           this.refreshProducts()
-          this.makeToast('Successfully Edited Product', `สินค้าไอดี ${product.id} ถูกแก้ไขแล้ว`)
+          this.makeToast('Successfully Edited Product', `สินค้าไอดี ${product._id} ถูกแก้ไขแล้ว`)
         }).catch(e => {
-          this.makeToast('Can\'t Edited Product', `ไม่สามารถปรับปรุงสินค้า ${product.id}`, 'danger')
+          this.makeToast('Can\'t Edited Product', `ไม่สามารถปรับปรุงสินค้า ${product._id}`, 'danger')
           this.refreshProducts()
         })
       }
@@ -74,12 +73,12 @@ export default {
       })
     },
     deleteProduct (product) {
-      if (confirm(`คุณต้องการจะลบสินค้า ${product.id} หรือไม่`)) {
-        axios.delete(`http://localhost:3000/products/${product.id}`).then(res => {
+      if (confirm(`คุณต้องการจะลบสินค้า ${product._id} หรือไม่`)) {
+        axios.delete(`http://localhost:3000/products/${product._id}`).then(res => {
           this.refreshProducts()
-          this.makeToast('Successfully Deleted Product', `สินค้าไอดี ${product.id} ถูกลบแล้ว (${product.name})`)
+          this.makeToast('Successfully Deleted Product', `สินค้าไอดี ${product._id} ถูกลบแล้ว (${product.name})`)
         }).catch(e => {
-          this.makeToast('Can\'t Delete Product', `ไม่สามารถลบสินค้า ${product.id}`, 'danger')
+          this.makeToast('Can\'t Delete Product', `ไม่สามารถลบสินค้า ${product._id}`, 'danger')
           this.refreshProducts()
         })
       }
@@ -98,18 +97,7 @@ export default {
         { key: 'price', label: 'ราคา' },
         { key: 'operators', label: 'กระบวนการ' }
       ],
-      productItems: [
-        { id: 1, name: 'IPad gen1 64G Wifi', price: 11000.0 },
-        { id: 2, name: 'IPad gen2 64G Wifi', price: 12000.0 },
-        { id: 3, name: 'IPad gen3 64G Wifi', price: 13000.0 },
-        { id: 4, name: 'IPad gen4 64G Wifi', price: 14000.0 },
-        { id: 5, name: 'IPad gen5 64G Wifi', price: 15000.0 },
-        { id: 6, name: 'IPad gen6 64G Wifi', price: 16000.0 },
-        { id: 7, name: 'IPad gen7 64G Wifi', price: 17000.0 },
-        { id: 8, name: 'IPad gen8 64G Wifi', price: 18000.0 },
-        { id: 9, name: 'IPad gen9 64G Wifi', price: 19000.0 },
-        { id: 10, name: 'IPad gen10 64G Wifi', price: 20000.0 }
-      ],
+      productItems: [],
       productId: 11,
       selectedItem: null
     }

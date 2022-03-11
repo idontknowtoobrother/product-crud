@@ -112,7 +112,7 @@ export default {
         this.reset()
       } else {
         // Edit
-        this.form.id = this.product.id
+        this.form._id = this.product._id
         this.form.name = this.product.name
         this.form.price = this.product.price
       }
